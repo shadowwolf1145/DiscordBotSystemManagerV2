@@ -17,7 +17,7 @@ App.use('/graphql',graphqlHTTP({
     schema:Schema,
     graphiql:true
 }))
-App.use(express.json({verify: VerifyDiscordRequest(process.env.PUBLIC_KEY)}))
+App.use('/interactions',express.json({verify: VerifyDiscordRequest(process.env.PUBLIC_KEY)}))
 
 App.post('/interactions', async function (req,res){
     const {type,body,data} = req.body
@@ -49,8 +49,8 @@ App.post('/interactions', async function (req,res){
     }
 });
 
-App.listen(4000,()=>{
-    console.log("Server Started: Port: 4000")
+App.listen(3000,()=>{
+    console.log("Server Started: Port: 3000")
     
     HasGuildCommands(process.env.APP_ID,process.env.GUILD_ID,[
         TEST_COMMAND
