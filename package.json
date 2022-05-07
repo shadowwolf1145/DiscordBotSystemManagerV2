@@ -2,11 +2,11 @@
   "name": "discord-getting-started",
   "version": "1.0.0",
   "description": "Basic Discord app using interactions",
-  "main": "server/app.js",
+  "main": "exportFolders/server/app.js",
   "type": "module",
   "scripts": {
-    "install": "cd server && npm install ",
-    "start": "cd server && node app"
+    "install": "cd exportFolders/server && npm install ",
+    "start": "cd exportFolders/server && node app"
   },
   "author": "Shay DeWael",
   "license": "MIT",

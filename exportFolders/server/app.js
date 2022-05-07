@@ -9,7 +9,7 @@ import {
     ButtonStyleTypes
 } from 'discord-interactions';
 import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './tools/utils.js';
-import { HasGuildCommands, TEST_COMMAND } from './tools/commands.js';
+import { HasGuildCommands, QUERY_DATABASE, TEST_COMMAND } from './tools/commands.js';
 
 const App = express()
 
@@ -53,6 +53,7 @@ App.listen(3000,()=>{
     console.log("Server Started: Port: 3000")
     
     HasGuildCommands(process.env.APP_ID,process.env.GUILD_ID,[
-        TEST_COMMAND
+        TEST_COMMAND,
+        QUERY_DATABASE
     ]);
 })
