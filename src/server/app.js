@@ -8,8 +8,8 @@ import {
     MessageComponentTypes,
     ButtonStyleTypes
 } from 'discord-interactions';
-import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './modules/utils.js';
-import { HasGuildCommands, TEST_COMMAND } from './modules/commands.js';
+import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './tools/utils.js';
+import { HasGuildCommands, TEST_COMMAND } from './tools/commands.js';
 
 const App = express()
 
