@@ -47,3 +47,41 @@ export const TEST_COMMAND = {
     description: 'Basic guild command',
     type: 1,
   };
+  export const QUERY_DATABASE = {
+    name: 'query_database',
+    description: 'query select information from database',
+    type: 1,
+    options:[
+      {
+        "name":"DiscordUser",
+        "description":`
+        Returns info about a Discord User.
+        Args in order can be:
+        UserID=number {UID=bool,name=bool,robloxUserid=bool}
+        returnInfo is the information you want to receive
+        `,
+        "type":1
+      },
+      {
+        "name":"RobloxPlayer",
+        "description":`
+        Returns info about a Roblox Player.
+        Args in order can be:
+        UserID=number,returnInfo={userid=bool,name=bool}
+        returnInfo is the information you want to receive
+        `,
+        "type":1
+      },
+      {
+        "name":"DiscordUser_RobloxPlayer",
+        "description":`
+        Returns info about a Discord User's  RobloxPlayer.
+        Args in order can be:
+        UserID=number or false,UserName=name#0000 or false,returnInfo={UID=bool,name=bool,robloxUserid=bool}
+        UserID and UserName cant be false at the same time
+        returnInfo is the information you want to receive
+        `,
+        "type":1
+      }
+    ]
+  };
