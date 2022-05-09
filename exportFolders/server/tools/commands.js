@@ -1,5 +1,5 @@
 import { capitalize, DiscordRequest } from './utils.js';
-
+import _ from 'lodash';
 export async function HasGuildCommands(appId, guildId, commands) {
   if (guildId === '' || appId === '') return;
 
@@ -47,41 +47,103 @@ export const TEST_COMMAND = {
     description: 'Basic guild command',
     type: 1,
   };
+const QUERY_OPTIONS = [
+  {
+    name:"mention_name",
+    description:"@Name of the user you want to lookup",
+    type:9,
+    required:true,
+  }
+]
+const Discord_Options = [].concat(QUERY_OPTIONS)
+Discord_Options.push({
+  name:"discord_options",
+  description:"a list of the possible data that can be returned about the discordUser",
+  required:true,
+  type:3,
+  choices:[
+    {
+      name:"UniqueID",
+      value:"UID"
+    },
+    {
+      name:"Name",
+      value:"name"
+    },
+    {
+      name:"robloxID",
+      value:"robloxUID"
+    },
+    {
+      name:"UniqueID_Name",
+      value:"UID name"
+    },{
+      name:"UniqueID_robloxUID",
+      value:"UID robloxUID"
+    },
+    {
+      name:"Name_robloxID",
+      value:"name robloxUID"
+    }
+  ]
+})
+const Roblox_Options = [].concat(QUERY_OPTIONS)
+Roblox_Options.push(
+  {
+  name:"roblox_options",
+  description:"a list of the possible data that can be returned about the robloxUser",
+  require:true,
+  type:3,
+  choices:[
+    {
+      name:"UniqueID",
+      value:"UID"
+    },
+    {
+      name:"Name",
+      value:"name"
+    },
+    {
+      name:"UniqueID_Name",
+      value:"UID name"
+    },
+  ]
+},
+{
+  name:"gameData",
+  description:"return a robloxUser's gameData",
+  type:3,
+  choices:[
+    {
+      name:"Game_Name",
+      value:"gameName"
+    }
+  ]
+})
+const DiscordRoblox_Options = _.union(Discord_Options,Roblox_Options)
   export const QUERY_DATABASE = {
     name: 'query_database',
-    description: 'query select information from database',
     type: 1,
+    description: 'Query select information from database',
     options:[
       {
-        "name":"DiscordUser",
-        "description":`
-        Returns info about a Discord User.
-        Args in order can be:
-        UserID=number {UID=bool,name=bool,robloxUserid=bool}
-        returnInfo is the information you want to receive
-        `,
-        "type":1
-      },
-      {
-        "name":"RobloxPlayer",
-        "description":`
-        Returns info about a Roblox Player.
-        Args in order can be:
-        UserID=number,returnInfo={userid=bool,name=bool}
-        returnInfo is the information you want to receive
-        `,
-        "type":1
-      },
-      {
-        "name":"DiscordUser_RobloxPlayer",
-        "description":`
-        Returns info about a Discord User's  RobloxPlayer.
-        Args in order can be:
-        UserID=number or false,UserName=name#0000 or false,returnInfo={UID=bool,name=bool,robloxUserid=bool}
-        UserID and UserName cant be false at the same time
-        returnInfo is the information you want to receive
-        `,
-        "type":1
+        name:'get_discorduser_info',
+        type:2,
+        description:"Query select information about a discorduser",
+        options:[
+          {
+            name:"discord",
+            type:1,
+            description:"return information related to the discorduser",
+            options:Discord_Options
+          },
+          {
+            name:"discordroblox",
+            type:1,
+            description:"return information related to the discorduser and their robloxuser",
+            options:DiscordRoblox_Options
+          }
+        ]
       }
     ]
   };

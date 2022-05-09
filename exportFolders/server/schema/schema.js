@@ -10,23 +10,23 @@ import e from "express";
 
 // Dummy Data
 var robloxplayers = [
-    {userid:'1',name:'UnfortunatePie'},
-    {userid:'2',name:'Shadowwolf1145'}
+    {UID:'1',name:'UnfortunatePie'},
+    {UID:'2',name:'Shadowwolf1145'}
 ]
 
 var discordusers = [
-    {UID:'123',name:'Rosalie#1234',robloxUserid:'1'},
-    {UID:'321',name:'Riok Riftstrider#4321',robloxUserid:'2'}
+    {UID:'123',name:'Rosalie#1234',robloxUID:'1'},
+    {UID:'321',name:'Riok Riftstrider#4321',robloxUID:'2'}
 ]
 
 var gOne = [
-    {gameName:"GameOneData",userid:'1',level:32},
-    {gameName:"GameOneData",userid:'2',level:23}
+    {gameName:"GameOneData",UID:'1',level:32},
+    {gameName:"GameOneData",UID:'2',level:23}
 ];
 
 var gTwo = [
-    {gameName:"GameTwoData",userid:'1',pet:'beep'},
-    {gameName:"GameTwoData",userid:'2',pet:'boop'}
+    {gameName:"GameTwoData",UID:'1',pet:'beep'},
+    {gameName:"GameTwoData",UID:'2',pet:'boop'}
 ];
 
 var games = [
@@ -35,8 +35,8 @@ var games = [
 ]
 
 class GameOneData {
-    constructor(userid,gameName,level){
-        this.userid = userid;
+    constructor(UID,gameName,level){
+        this.UID = UID;
         this.gameName = gameName;
         this.level = level;
     }
@@ -45,7 +45,7 @@ class GameOneData {
 const GameDataInferace = new GraphQLInterfaceType({
     name:"GameData",
     fields:() =>({
-        userid:{type:GraphQLID},
+        UID:{type:GraphQLID},
         gameName:{type:GraphQLString}
     })
 })
@@ -55,7 +55,7 @@ const GameOneDataType = new GraphQLObjectType({
     interfaces:()=>[GameDataInferace],
     isTypeOf: value => value.gameName == GameOneDataType,
     fields: () => ({
-        userid:{type:GraphQLID},
+        UID:{type:GraphQLID},
         level:{type:GraphQLInt},
         gameName:{type:GraphQLString}
     })
@@ -66,7 +66,7 @@ const GameTwoDataType = new GraphQLObjectType({
     interfaces:()=>[GameDataInferace],
     isTypeOf: value => value.gameName == GameTwoDataType,
     fields: () => ({
-        userid:{type:GraphQLID},
+        UID:{type:GraphQLID},
         pet:{type:GraphQLString},
         gameName:{type:GraphQLString}
     })
@@ -75,11 +75,11 @@ const GameTwoDataType = new GraphQLObjectType({
 const RobloxPlayerType = new GraphQLObjectType({
     name:"RobloxPlayer",
     fields: () => ({
-        userid:{type:GraphQLID},
+        UID:{type:GraphQLID},
         name:{type:GraphQLString},
         gameData:{
             type:GraphQLList(GameDataInferace),
-            args:{userid:{type:GraphQLID}},
+            args:{UID:{type:GraphQLID}},
             resolve(parent,args){
                 var temp = []
                 games.forEach((game)=>{
@@ -87,7 +87,7 @@ const RobloxPlayerType = new GraphQLObjectType({
                         temp.push(row)
                     })
                 })
-                temp = _.filter(temp,{userid:parent.userid})
+                temp = _.filter(temp,{UID:parent.UID})
                 return temp
             }
         }
@@ -99,11 +99,11 @@ const DiscordUserType = new GraphQLObjectType({
     fields:()=>({
         UID:{type:GraphQLID},
         name:{type:GraphQLString},
-        robloxUserid:{type:GraphQLID},
+        robloxUID:{type:GraphQLID},
         robloxUser:{
             type:RobloxPlayerType,
             resolve(parent,args){
-                return _.find(robloxplayers,{userid:parent.robloxUserid})
+                return _.find(robloxplayers,{UID:parent.robloxUID})
             }
         }
     })
@@ -115,9 +115,9 @@ const RootQuery = new GraphQLObjectType({
     fields:{
         robloxPlayer:{
             type:RobloxPlayerType,
-            args:{userid:{type:GraphQLID}},
+            args:{UID:{type:GraphQLID}},
             resolve(parent,args){
-                return _.find(robloxplayers,{userid:args.userid})
+                return _.find(robloxplayers,{UID:args.UID})
             },
         },
         discordUser:{
