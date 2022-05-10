@@ -16,7 +16,7 @@ var robloxplayers = [
 
 var discordusers = [
     {UID:'123',name:'Rosalie#1234',robloxUID:'1'},
-    {UID:'321',name:'Riok Riftstrider#4321',robloxUID:'2'}
+    {UID:'266767474777784320',name:'Riok Riftstrider#4321',robloxUID:'2'}
 ]
 
 var gOne = [

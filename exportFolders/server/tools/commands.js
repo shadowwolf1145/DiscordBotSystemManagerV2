@@ -82,7 +82,7 @@ Discord_Options.push({
       value:"UID robloxUID"
     },
     {
-      name:"Name_robloxID",
+      name:"Name_robloxUID",
       value:"name robloxUID"
     }
   ]
@@ -110,7 +110,7 @@ Roblox_Options.push(
   ]
 },
 {
-  name:"gameData",
+  name:"gamedata_options",
   description:"return a robloxUser's gameData",
   type:3,
   choices:[
