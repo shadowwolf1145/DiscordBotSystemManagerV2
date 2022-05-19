@@ -121,8 +121,8 @@ Roblox_Options.push(
   ]
 })
 const DiscordRoblox_Options = _.union(Discord_Options,Roblox_Options)
-  export const QUERY_DATABASE = {
-    name: 'query_database',
+  export const T6 = { // Query Database
+    name: 't6',//query_database
     type: 1,
     description: 'Query select information from database',
     options:[

@@ -10,7 +10,8 @@ import {
     ButtonStyleTypes
 } from 'discord-interactions';
 import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './tools/utils.js';
-import { HasGuildCommands, TEST_COMMAND,T,T2,T3,T4,T5} from './tools/commands.js';
+import { HasGuildCommands, TEST_COMMAND,T,T2,T3,T4,T5,T6} from './tools/commands.js';
+import mongoose from "mongoose";
 const Site = 'https://wiry-linen-lifter.glitch.me/graphql?query='
 
 function CommandLogger(container){
@@ -104,6 +105,13 @@ const QUERY_TYPES = {
 
 const App = express()
 
+
+mongoose.connect('mongodb+srv://shadowwolf1145:Battera03@gql-game-database.x1s2nlr.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connection.once('open',()=>{
+  console.log("Connected To Database")
+})
+
+
 App.use('/graphql',graphqlHTTP({
     schema:Schema,
     graphiql:true
@@ -193,6 +201,7 @@ App.listen(3000,()=>{
         T,
         T2,
         T3,
-        T5
+        T5,
+        T6
     ]);
 })
