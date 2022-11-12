@@ -10,13 +10,13 @@ import e from "express";
 
 // Dummy Data
 var robloxplayers = [
-    {UID:'1',name:'UnfortunatePie'},
-    {UID:'2',name:'Shadowwolf1145'}
+    {UID:'1',name:'Fred'},
+    {UID:'2',name:'Bob'}
 ]
 
 var discordusers = [
-    {UID:'123',name:'Rosalie#1234',robloxUID:'1'},
-    {UID:'266767474777784320',name:'Riok Riftstrider#4321',robloxUID:'2'}
+    {UID:'123',name:'Fred#1234',robloxUID:'1'},
+    {UID:'321',name:'Bob#4321',robloxUID:'2'}
 ]
 
 var gOne = [
